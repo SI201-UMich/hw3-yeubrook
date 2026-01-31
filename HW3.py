@@ -92,8 +92,29 @@ class CouponDispenser:
 
         Reminder: Use lists only (no dictionaries).
         """
-        # TODO: Implement per instructions 
-        pass
+        round_number = 1
+
+        while True:
+            user_input = input(f"Round {round_number} - Enter a name (or a comma-separated list), or type 'show' or 'exit': ")
+
+            if user_input == "exit":
+                print("Goodbye!")
+                break
+                
+            elif user_input == "show":
+                for i, name in enumerate(self.customer_roster):
+                    coupon = self.coupon_cards[self.issued_indices[i]]
+                    print(f"{name}: {coupon}")
+
+            else:
+                pieces = user_input.split(",")
+                for piece in pieces:
+                    name = piece.strip()
+                    if name == "":
+                        continue
+                    print(self.issue_coupon(name))
+
+            round_number += 1
 
     def tally_distribution(self):
         """
