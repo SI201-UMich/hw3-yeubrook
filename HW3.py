@@ -63,8 +63,19 @@ class CouponDispenser:
         Returns:
             str: message as described above
         """
-        # TODO: Implement per instructions
-        pass
+        if self.coupon_cards == []:
+            return "The box is empty."
+        index = None
+        for i, findName in enumerate(self.customer_roster):
+            if findName == name:
+                index = self.issued_indices[i]
+                coupon = self.coupon_cards[index]
+                return f"That name already has a coupon: {coupon}"
+            
+        randomIndex = random.randrange(len(self.coupon_cards))
+        self.customer_roster.append(name)
+        self.issued_indices.append(randomIndex)
+        return self.coupon_cards[randomIndex]
 
     def distribute_session(self):
         """
